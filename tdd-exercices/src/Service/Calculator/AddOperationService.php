@@ -11,6 +11,10 @@ class AddOperationService extends AbstractOperationService
     
     public function getValue(): float
     {
-        return $this->leftOperand + $this->rightOperand;
+        if(is_numeric($this->leftOperand) && is_numeric($this->rightOperand)){
+            return $this->leftOperand + $this->rightOperand;
+        }
+
+        throw new \Exception("Operands must be numeric");
     }
 }

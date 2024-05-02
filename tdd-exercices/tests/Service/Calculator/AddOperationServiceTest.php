@@ -24,4 +24,13 @@ class AddOperationServiceTest extends KernelTestCase
         $addOperationService = new AddOperationService(1, -2);
         $this->assertEquals(-1, $addOperationService->getValue());
     }
+
+    public function test_getValue_checkResultWithNonNumerics(): void
+    {
+        $addOperationService = new AddOperationService([], 'not a number');
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Operands must be numeric');
+        $addOperationService->getValue();
+    }
 }

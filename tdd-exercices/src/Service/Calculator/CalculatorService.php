@@ -6,7 +6,7 @@ class CalculatorService
 {
     const OPERATIONS = [
         'add',
-        'subtract',
+        'substract',
         'multiply',
         'divide'
     ];
@@ -49,7 +49,7 @@ class CalculatorService
             case 'add':
                 $operationService = new AddOperationService($leftOperand, $rightOperand);
                 break;
-            case 'subtract':
+            case 'substract':
                 $operationService = new SubOperationService($leftOperand, $rightOperand);
                 break;
             case 'multiply':
