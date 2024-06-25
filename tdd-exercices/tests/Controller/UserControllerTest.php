@@ -31,6 +31,30 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(405, $client->getResponse()->getStatusCode());
     }
 
+    public function test_LoginUser_routeExists() {
+        $client = static::createClient();
+        $client->request(
+            'POST',
+            '/login',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode([
+                'email'=> 'test@gmail.com',
+                'password'=> 'test'
+            ]));
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @dataProvider dataprovider_postUser_onlyAcceptsPostMethod
+     */
+    public function test_LoginUser_onlyAcceptsPostMethod(string $method) {
+        $client = static::createClient();
+        $client->request($method, '/login');
+        $this->assertEquals(405, $client->getResponse()->getStatusCode());
+    }
+
     private static function dataprovider_postUser_onlyAcceptsPostMethod(): array {
         return [
             ['GET'],
